@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>悦听</title>
+    <link rel="icon" href="/img/音乐.png" type="image/x-icon" title="RSS">
+    <link rel="stylesheet" href="css/rest.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/axios.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <header class="search">
+            <h1>悦听</h1>
+            <div class="seach">
+                <input class="search_bar" v-model="count" @keyup.enter="search" type="search" placeholder="搜索">
+                <i class="icon-search"></i>
+            </div>
+
+        </header>
+        <main class="main">
+            <div class="main-music">
+                <ul>
+                    <li @dblclick="PlayMusic(item,item.id)" v-for="item in MusicList">
+                        <a @click="PlayMusic(item,item.id)" href="javascript:;">
+                            <span>
+                                {{item.artists[0].name}}-{{item.name}}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="secttio">
+                <span>
+                    {{title}}
+                </span>
+                <img :class="isclass?'on':''" v-show="MusicUrl!=''" src="img/timg.gif">
+            </div>
+            <div class="count">
+                <h1 :class="hotComments.length > 0?'on':''">热门评论</h1>
+                <ul>
+                    <li v-for="item in hotComments">
+                        <img :src="item.user.avatarUrl">
+                        <p>{{item.user.nickname}}</p>
+                        <span>{{item.content}}</span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+        <footer class="footer">
+            <audio @play="Playon" @pause="Pauseon" id="music-play" :src="MusicUrl" loop controls autoplay name="未知音频" author="未知作者"></audio>
+        </footer>
+    </div>
+    <!-- 背景 -->
+    <div class="slidershow">
+        <div class="slidershow--image" style="background-image: url('./img/bg\ \(3\).jpg')"></div>
+        <div class="slidershow--image" style="background-image: url('./img/bg\ \(4\).jpg')"></div>
+        <div class="slidershow--image" style="background-image: url('./img/bg\ \(1\).jpg')"></div>
+        <div class="slidershow--image" style="background-image: url('./img/bg\ \(2\).jpg')"></div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
